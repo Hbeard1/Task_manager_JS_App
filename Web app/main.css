@@ -1,0 +1,50 @@
+html,body{
+	background-color: white;
+	height: 100%;
+	margin: 0;
+	Padding: 0;
+}
+*{
+	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	Padding: 0;
+}
+
+
+#background{
+	background-image: url("https://static.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	display: flex;
+	align-items: Center;
+	justify-content: center;
+}
+
+.welcome{
+		background: rgba(0,0,0, .4);
+		padding: 25px 15px;
+		text-align: center;
+}
+
+h1{
+	color:white;
+	font-size:28px;
+	font-weight:100;
+	text-transform: uppercase;
+}
+.enter{
+	width: 100%;
+	padding: 10px 0;
+	text-align: center;
+	margin: 15px 0;
+	background-color:#25b3ec;
+	color:white;
+	font-size:25px;
+}
+a{
+	text-decoration: none;
+}

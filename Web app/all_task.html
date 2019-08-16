@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<title>
+			Responsive Web App  
+		</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="My name is Heriberto, and this is a Responsive web app.">
+		<meta name="keywords" content="Web devlopment,JR Web Dev,Heriberto Beard,Eddie Beard, Web dev portfolio">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="main_all_task.css" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Audiowide&display=swap" rel="stylesheet">
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	</head>
+	
+	<body onload="replace(); clear(); number_complete(); number();">
+		<div id="background">	
+			<section class="head">
+				<div class="header">
+					<div class="logo-container">
+						<a href="index.html" alt="Task Manager HomePage">
+							<h2 class="logo">Task Manager</h2>
+						</a>
+					</div>
+					<div class="task-counter">
+						<h2 id="task_total">
+							<span class="number" id="total"></span> Tasks
+						</h2>
+						<h2 id="task_completed">
+							<span class="number" id="total_complate"></span> Completed
+						</h2>
+					</div>
+					<div class="add_icon">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="modal">
+			<div class="modal-content">
+				<span class="close-button">&times;</span>
+				<h1>Add A New Task!</h1>
+				<form>
+					Task Name:<br>
+					<input type="text" name="task_name_input" id="task_name_in" value="">
+					<br>
+					Date Created:<br>
+					<input type="text" name="Task_Date_input" id="task_date_in" value="">
+					<br>
+					Description:<br>
+					<textarea type="text" name="task_desc_input" id="description"> </textarea>
+					<br><br>
+					<input type="button" value="Submit" id="submit" onclick="new_task(); save_load(); number(); toggleModal()">
+				</form> 
+			</div>
+		</div>
+		<section class="content" id="card_contain"">
+			
+		</section>
+		
+	</body>
+	<script>
+		var modal = document.querySelector(".modal");
+		var trigger = document.querySelector(".add_icon");
+		var closeButton = document.querySelector(".close-button");
+
+		function toggleModal() {
+			modal.classList.toggle("show-modal");
+		}
+
+		function windowOnClick(event) {
+			if (event.target === modal) {
+				toggleModal();
+			}
+		}
+
+		trigger.addEventListener("click", toggleModal);
+		closeButton.addEventListener("click", toggleModal);
+		window.addEventListener("click", windowOnClick); 
+	</script>	
+	
+	<script>
+	var card = document.getElementById("card_contain");
+	var submit_btn = document.getElementById("submit");
+	
+	function save_load(){
+		var save = card.innerHTML;
+		localStorage.setItem("content",save);
+		
+	}
+	function clear(){
+			window.localStorage.clear("content");
+	}
+	function replace(){
+		if (localStorage.getItem("content") !== null){
+			card.innerHTML += localStorage.getItem("content");
+		}
+		else{
+			card.innerHTML = '<h1> Add New Task</h1><p class="instruction">Hi there, you can add a new Task by clicking the button on your right. Your task will be saved, so feel free to leave the page and come back, but if you want to remove all task refresh your browser two times. To mark a task completed click on the task.</p>'
+		}
+		}
+	
+	function new_task(){
+		var task_name = document.getElementById("task_name_in").value;
+		var task_date = document.getElementById("task_date_in").value;
+		var task_desc_input = document.getElementById("description").value;
+		
+		card.innerHTML += ' <div class="card_container" id="card_container"><div class="card"><h2 class="task_name">'+ task_name + '</h2><h3 class="task_due">'+ task_date +'</h3><p class="task_description">' + task_desc_input+'</p></div></div>';	
+		card.style.display = "flex";
+	}
+	
+	
+	
+	</script>
+	<script>
+
+		var total= document.getElementById("total");
+		function number(){
+		var list = document.getElementsByClassName("card_container");
+			total.innerHTML = list.length;
+		}
+	</script>
+	<script>
+		var list_Items = document.getElementById("card_contain")
+		var list = list_Items.getElementsByTagName("div");
+		
+		list_Items.addEventListener("click", activate_item);
+		
+		function activate_item(e){
+			if(e.target.nodeName =="DIV"){
+				for(i = 0; i<e.target.parentNode.children.length; i++){
+				}
+				e.target.classList.add("card_container_complete");
+				save_load();
+				number_complete();
+				}
+				
+			}
+		var totals= document.getElementById("total_complate");
+		function number_complete(){
+		var list = document.getElementsByClassName("card_container_complete");
+			totals.innerHTML = list.length;
+			
+		}
+	</script>
+</html>
+			
